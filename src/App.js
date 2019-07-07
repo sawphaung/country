@@ -1,26 +1,59 @@
 import React from 'react';
-import logo from './logo.svg';
+import axios from 'axios';
 import './App.css';
+import Header from './components/Header';
+import CardList from './components/CardList';
+import SearchBox from './components/SearchBox';
+import Region from './components/Region';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      data: [],
+      searchfield: '',
+      region: ''
+    };
+  }
+
+  componentDidMount() {
+    axios
+      .get('https://restcountries.eu/rest/v2/all')
+      .then(response => {
+        this.setState({ data: response.data });
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  }
+
+  onSearchChange = event => {
+    this.setState({ searchfield: event.target.value });
+  };
+
+  onHandleChange = event => {
+    this.setState({ region: event.target.value });
+    console.log(event.target.value);
+  };
+
+  render() {
+    const { data, searchfield, region } = this.state;
+
+    const filterCountries = data.filter(country => {
+      return country.name.toLowerCase().includes(searchfield.toLowerCase());
+    });
+
+    return (
+      <div>
+        <Header />
+        <div className='container'>
+          <SearchBox searchChange={this.onSearchChange} />
+          <Region handleChange={this.onHandleChange} />
+          <CardList data={filterCountries} region={region} />
+        </div>
+      </div>
+    );
+  }
 }
 
 export default App;
