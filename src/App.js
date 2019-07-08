@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+
 import './App.css';
 import Header from './components/Header';
 import CardList from './components/CardList';
@@ -7,14 +8,11 @@ import SearchBox from './components/SearchBox';
 import Region from './components/Region';
 
 class App extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      data: [],
-      searchfield: '',
-      region: ''
-    };
-  }
+  state = {
+    data: [],
+    searchfield: '',
+    region: ''
+  };
 
   componentDidMount() {
     axios
@@ -32,8 +30,9 @@ class App extends React.Component {
   };
 
   onHandleChange = event => {
-    this.setState({ region: event.target.value });
-    console.log(event.target.value);
+    this.setState({ region: event.target.value }, () => {
+      console.log('region: ', this.state.region);
+    });
   };
 
   render() {
@@ -46,9 +45,13 @@ class App extends React.Component {
     return (
       <div>
         <Header />
+
         <div className='container'>
-          <SearchBox searchChange={this.onSearchChange} />
-          <Region handleChange={this.onHandleChange} />
+          <div className='form'>
+            <SearchBox searchChange={this.onSearchChange} />
+            <Region handleChange={this.onHandleChange} />
+          </div>
+
           <CardList data={filterCountries} region={region} />
         </div>
       </div>

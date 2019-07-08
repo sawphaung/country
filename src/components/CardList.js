@@ -3,22 +3,23 @@ import Card from './Card';
 
 const CardList = ({ data, region }) => {
   if (region !== '') {
-    var filteredList = data.filter(country => {
-      return region === country.region;
+    const filterRegion = data.filter(name => {
+      return region === name.region;
     });
 
-    const renderedList = filteredList.map((country, i) => {
+    const renderedList = filterRegion.map((country, i) => {
       return (
         <Card
           key={i}
-          flag={data[i].flag}
-          name={data[i].name}
-          population={data[i].population}
-          region={data[i].region}
-          capital={data[i].capital}
+          flag={filterRegion[i].flag}
+          name={filterRegion[i].name}
+          population={filterRegion[i].population}
+          region={filterRegion[i].region}
+          capital={filterRegion[i].capital}
         />
       );
     });
+
     return <div className='countries'>{renderedList}</div>;
   } else {
     const renderedList = data.map((country, i) => {
