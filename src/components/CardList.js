@@ -7,32 +7,14 @@ const CardList = ({ data, region }) => {
       return region === name.region;
     });
 
-    const renderedList = filterRegion.map((country, i) => {
-      return (
-        <Card
-          key={i}
-          flag={filterRegion[i].flag}
-          name={filterRegion[i].name}
-          population={filterRegion[i].population}
-          region={filterRegion[i].region}
-          capital={filterRegion[i].capital}
-        />
-      );
+    const renderedList = filterRegion.map(country => {
+      return <Card key={country.name} country={country} />;
     });
 
     return <div className='countries'>{renderedList}</div>;
   } else {
-    const renderedList = data.map((country, i) => {
-      return (
-        <Card
-          key={i}
-          flag={data[i].flag}
-          name={data[i].name}
-          population={data[i].population}
-          region={data[i].region}
-          capital={data[i].capital}
-        />
-      );
+    const renderedList = data.map(country => {
+      return <Card key={country.name} country={country} />;
     });
 
     return <div className='countries'>{renderedList}</div>;

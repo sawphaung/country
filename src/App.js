@@ -1,11 +1,12 @@
 import React from 'react';
 import axios from 'axios';
-
 import './App.css';
 import Header from './components/Header';
 import CardList from './components/CardList';
 import SearchBox from './components/SearchBox';
 import Region from './components/Region';
+import { Route, BrowserRouter as Router, Switch } from 'react-router-dom';
+import CardDetails from './components/CardDetails';
 
 class App extends React.Component {
   state = {
@@ -30,9 +31,7 @@ class App extends React.Component {
   };
 
   onHandleChange = event => {
-    this.setState({ region: event.target.value }, () => {
-      console.log('region: ', this.state.region);
-    });
+    this.setState({ region: event.target.value });
   };
 
   render() {
@@ -43,18 +42,32 @@ class App extends React.Component {
     });
 
     return (
-      <div>
-        <Header />
+      <Router>
+        <div>
+          <Header />
+          <div className='container'>
+            <div className='form'>
+              <SearchBox searchChange={this.onSearchChange} />
+              <Region handleChange={this.onHandleChange} />
+            </div>
 
-        <div className='container'>
-          <div className='form'>
-            <SearchBox searchChange={this.onSearchChange} />
-            <Region handleChange={this.onHandleChange} />
+            <Switch>
+              <Route
+                exact
+                path={process.env.PUBLIC_URL + '/'}
+                render={props => (
+                  <CardList data={filterCountries} region={region} />
+                )}
+              />
+
+              <Route
+                path={process.env.PUBLIC_URL + '/:id'}
+                render={props => <CardDetails />}
+              />
+            </Switch>
           </div>
-
-          <CardList data={filterCountries} region={region} />
         </div>
-      </div>
+      </Router>
     );
   }
 }

@@ -1,23 +1,35 @@
-import React from 'react';
+import React, { Fragment } from 'react';
+import { Link } from 'react-router-dom';
 
-function CardDetails({ flag, name, population, region, capital }) {
+const CountryDetail = () => {
   return (
-    <div className='card'>
-      <img className='flag' src={flag} alt='' />
-      <div className='content'>
-        <p className='country-name'>{name}</p>
+    <div>
+      <Fragment>
+        <Link to='/' className='button'>
+          Back To Home
+        </Link>
+      </Fragment>
+
+      <div style={marginTop} className='content'>
+        <div className='country-name'>Name: </div>
         <div>
-          Population: <span> {population}</span>
+          <strong>Population:</strong>
         </div>
         <div>
-          Region:<span> {region}</span>
+          <strong>Region:</strong>
         </div>
+
         <div>
-          Capital: <span> {capital}</span>
+          <strong>Capital:</strong>
         </div>
+        <p>I don't know how to pass data. </p>
       </div>
     </div>
   );
-}
+};
 
-export default CardDetails;
+const marginTop = {
+  marginTop: '5rem'
+};
+
+export default CountryDetail;
