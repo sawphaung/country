@@ -123,10 +123,9 @@ a {
 
 .border-lists {
   display: inline-block;
-
   width: 8rem;
   text-align: center;
-  margin: 4rem 0.5rem;
+  margin: 3rem 0.5rem 0rem;
   border-radius: 0.5rem;
   border: 1px solid rgb(123, 120, 120);
 }
@@ -138,4 +137,44 @@ a {
 
 .languages:not(:last-child):after {
   content: ',';
+}
+
+@media only screen and (max-width: 700px) {
+  .form {
+    display: block;
+  }
+
+  .countries {
+    display: block;
+  }
+
+  .card {
+    width: 80%;
+  }
+
+  .country-container {
+    display: block;
+    text-align: center;
+  }
+
+  .country-container .flag {
+    width: 80%;
+    height: 20rem;
+  }
+
+  .country-container .content {
+    text-align: left;
+    margin-left: 0rem;
+  }
+}
+
+@media (min-width: 700px) and (max-width: 1200px) {
+  .card {
+    width: 45%;
+  }
+
+  .country-container {
+    display: block;
+    text-align: center;
+  }
 }
