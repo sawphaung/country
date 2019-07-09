@@ -54,16 +54,19 @@ a {
   margin: 2.5rem auto;
 }
 
+.margin-top-20 {
+  margin-top: 2rem;
+}
+
 .container {
   width: 95%;
   margin: 0 auto;
 }
 
 .flag {
-  max-width: none;
   width: 100%;
+  height: 25rem;
   object-fit: cover;
-  height: 23rem;
 }
 
 .content {

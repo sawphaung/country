@@ -1,14 +1,12 @@
-import React from 'react';
+import React, { Fragment } from 'react';
+import { Link } from 'react-router-dom';
 
 class CountryDetail extends React.Component {
-  constructor(props) {
-    super(props);
-    this.goBack = this.goBack.bind(this);
+  constructor() {
+    super();
+    this.state = {};
   }
 
-  goBack() {
-    this.props.history.goBack();
-  }
   render() {
     const { location } = this.props;
 
@@ -20,7 +18,7 @@ class CountryDetail extends React.Component {
 
     const languages = this.props.location.languages.map(languages => (
       <div className='languages' key={languages.name}>
-        {languages.name}
+        {languages.name} {languages.nativeName}
       </div>
     ));
 
@@ -31,10 +29,15 @@ class CountryDetail extends React.Component {
     ));
 
     return (
-      <div>
-        <button className='button' onClick={this.goBack}>
+      <div className='margin-top-20'>
+        <Fragment>
+          <Link to='/' className='button'>
+            &larr; Back To Home
+          </Link>
+        </Fragment>
+        {/* <button className='button' onClick={this.goBack}>
           Back to Home
-        </button>
+        </button> */}
         <div className='country-container'>
           <img className='flag' src={location.flag} alt='' />
 
@@ -46,7 +49,7 @@ class CountryDetail extends React.Component {
               Native Name: <span>{location.nativeName}</span>{' '}
             </div>
             <div>
-              Population: <span>{location.population}</span>
+              Population: <span>{location.population.toLocaleString()}</span>
             </div>
             <div>
               Region: <span>{location.region}</span>
@@ -67,7 +70,13 @@ class CountryDetail extends React.Component {
               Languages: <span>{languages} </span>
             </div>
             <div>
-              Border Countries: <span>{borders}</span>
+              {borders.length > 0 && (
+                <p>
+                  Border Countries:
+                  {borders}
+                </p>
+              )}
+              {borders.length === 0 && <span>No Border Countries</span>}
             </div>
           </div>
         </div>

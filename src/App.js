@@ -46,17 +46,18 @@ class App extends React.Component {
         <div>
           <Header />
           <div className='container'>
-            <div className='form'>
-              <SearchBox searchChange={this.onSearchChange} />
-              <Region handleChange={this.onHandleChange} />
-            </div>
-
             <Switch>
               <Route
                 exact
                 path={process.env.PUBLIC_URL + '/'}
                 render={props => (
-                  <CardList data={filterCountries} region={region} />
+                  <div>
+                    <div className='form'>
+                      <SearchBox searchChange={this.onSearchChange} />
+                      <Region handleChange={this.onHandleChange} />
+                    </div>
+                    <CardList data={filterCountries} region={region} />
+                  </div>
                 )}
               />
 
