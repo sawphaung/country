@@ -46,6 +46,7 @@ a {
 .countries {
   display: flex;
   flex-wrap: wrap;
+  margin-top: 2rem;
 }
 
 .card {
