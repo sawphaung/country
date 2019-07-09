@@ -62,7 +62,13 @@ class App extends React.Component {
 
               <Route
                 path={process.env.PUBLIC_URL + '/:id'}
-                render={props => <CardDetails />}
+                render={props => (
+                  <CardDetails
+                    country={data}
+                    history={this.props.history}
+                    {...props}
+                  />
+                )}
               />
             </Switch>
           </div>

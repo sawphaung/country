@@ -10,12 +10,20 @@ function Card({ country }) {
           name: country.name,
           population: country.population,
           region: country.region,
-          capital: country.capital
+          capital: country.capital,
+          flag: country.flag,
+          subregion: country.subregion,
+          nativeName: country.nativeName,
+          topLevelDomain: country.topLevelDomain,
+          currencies: country.currencies,
+          languages: country.languages,
+          borders: country.borders
         }}
       >
         <img className='flag' src={country.flag} alt='' />
+
         <div className='content'>
-          <p className='country-name'>{country.name}</p>
+          <h1 className='country-name'>{country.name}</h1>
           <div>
             Population: <span> {country.population}</span>
           </div>
