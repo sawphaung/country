@@ -10,19 +10,19 @@ class CountryDetail extends React.Component {
   render() {
     const { location } = this.props;
 
-    const currencyList = this.props.location.currencies.map(country => (
+    const currencyList = location.currencies.map(country => (
       <span className='currencies' key={country.name}>
         {country.name}
       </span>
     ));
 
-    const languages = this.props.location.languages.map(languages => (
+    const languages = location.languages.map(languages => (
       <div className='languages' key={languages.name}>
         {languages.name} {languages.nativeName}
       </div>
     ));
 
-    const borders = this.props.location.borders.map(border => (
+    const borders = location.borders.map(border => (
       <div className='border-lists' key={border}>
         {border}
       </div>
@@ -35,9 +35,7 @@ class CountryDetail extends React.Component {
             &larr; Back To Home
           </Link>
         </Fragment>
-        {/* <button className='button' onClick={this.goBack}>
-          Back to Home
-        </button> */}
+
         <div className='country-container'>
           <img className='flag' src={location.flag} alt='' />
 
