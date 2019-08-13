@@ -3,8 +3,8 @@ import Card from './Card';
 
 const CardList = ({ data, region }) => {
   if (region !== '') {
-    const filterRegion = data.filter(name => {
-      return region === name.region;
+    const filterRegion = data.filter(country => {
+      return country.region === region;
     });
 
     const renderedList = filterRegion.map(country => {

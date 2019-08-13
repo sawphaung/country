@@ -27,7 +27,7 @@ function App() {
   };
 
   const onHandleChange = event => {
-    setRegion({ region: event.target.value });
+    setRegion(event.target.value);
   };
 
   const filterCountries = data.filter(country => {
