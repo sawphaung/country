@@ -18,14 +18,15 @@ class CountryDetail extends React.Component {
 
     const languages = location.languages.map(languages => (
       <div className='languages' key={languages.name}>
-        {languages.name} {languages.nativeName}
+        {languages.name}
+        {', '} {languages.nativeName}
       </div>
     ));
 
     const borders = location.borders.map(border => (
-      <div className='border-lists' key={border}>
-        {border}
-      </div>
+      <Link to={`/${border}`} key={border}>
+        {border}{' '}
+      </Link>
     ));
 
     return (
@@ -68,12 +69,7 @@ class CountryDetail extends React.Component {
               Languages: <span>{languages} </span>
             </div>
             <div>
-              {borders.length > 0 && (
-                <p>
-                  Border Countries:
-                  {borders}
-                </p>
-              )}
+              {borders.length > 0 && <p>Border Countries: {borders}</p>}
               {borders.length === 0 && <span>No Border Countries</span>}
             </div>
           </div>

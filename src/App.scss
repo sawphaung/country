@@ -6,7 +6,7 @@
 
 html {
   font-size: 62.5%;
-  font-family: 'Nunito Sans', sans-serif;
+  font-family: "Nunito Sans", sans-serif;
 }
 
 a {
@@ -45,20 +45,24 @@ a {
 
 .countries {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-columns: repeat(4, 1fr);
   grid-gap: 3rem;
+
+  @media screen and (max-width: 1500px) {
+    grid-template-columns: repeat(3, 1fr);
+  }
 }
 
 .card {
   border: 0.5px solid grey;
   cursor: pointer;
   backface-visibility: hidden;
-  transform: translateZ(0);
-  transition: transform 0.25s ease-out;
-}
+  transform-style: preserve-3d;
+  transition: all 0.25s ease;
 
-.card:hover {
-  transform: scale(1.05);
+  &:hover {
+    transform: scale(1.05);
+  }
 }
 
 .margin-top-20 {
@@ -142,7 +146,7 @@ a {
 }
 
 .languages:not(:last-child):after {
-  content: ',';
+  content: ",";
 }
 
 @media only screen and (max-width: 700px) {
