@@ -13,6 +13,22 @@ function App() {
   const [searchField, setSearchField] = useState("");
   const [region, setRegion] = useState("");
 
+  const [showScroll, setShowScroll] = useState(false);
+
+  const checkScrollTop = () => {
+    if (!showScroll && window.pageYOffset > 400) {
+      setShowScroll(true);
+    } else if (showScroll && window.pageYOffset <= 400) {
+      setShowScroll(false);
+    }
+  };
+
+  const scrollTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
+  window.addEventListener("scroll", checkScrollTop);
+
   useEffect(() => {
     const loadData = async () => {
       const result = await axios("https://restcountries.eu/rest/v2/all");
@@ -36,31 +52,48 @@ function App() {
 
   return (
     <Router>
-      <div>
-        <Header />
-        <div className="container">
-          <Switch>
-            <Route
-              exact
-              path={process.env.PUBLIC_URL + "/"}
-              render={(props) => (
-                <div>
-                  <div className="form">
-                    <SearchBox searchChange={onSearchChange} />
-                    <Region handleChange={onHandleChange} />
-                  </div>
-                  <CardList data={filterCountries} region={region} />
+      <Header />
+      <div className="container">
+        <Switch>
+          <Route
+            exact
+            path={process.env.PUBLIC_URL + "/"}
+            render={(props) => (
+              <div>
+                <div className="form">
+                  <SearchBox searchChange={onSearchChange} />
+                  <Region handleChange={onHandleChange} />
                 </div>
-              )}
-            />
+                <CardList data={filterCountries} region={region} />
+              </div>
+            )}
+          />
 
-            <Route
-              path={process.env.PUBLIC_URL + "/:id"}
-              render={(props) => <CardDetails country={data} {...props} />}
-            />
-          </Switch>
-        </div>
+          <Route
+            path={process.env.PUBLIC_URL + "/:id"}
+            render={(props) => <CardDetails country={data} {...props} />}
+          />
+        </Switch>
       </div>
+
+      <div
+        className="scrollTop"
+        onClick={scrollTop}
+        style={{ height: 40, display: showScroll ? "flex" : "none" }}
+      ></div>
+
+      <footer>
+        <p>
+          Designed by
+          <a
+            href="https://www.sawphaung.com/"
+            rel="noopener noreferrer"
+            target="_blank"
+          >
+            Saw Phaung
+          </a>
+        </p>
+      </footer>
     </Router>
   );
 }
